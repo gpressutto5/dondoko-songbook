@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Taiko no Tatsujin: Rhythm Festival Song List — Dondoko Songbook</title>
+  <meta name="description" content="Unofficial list of every song in Taiko no Tatsujin: Rhythm Festival (太鼓の達人 ドンダフルフェスティバル) — base game, DLC and Taiko Music Pass — with search in English, Japanese or romaji, filters, difficulty levels and audio previews.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Taiko no Tatsujin: Rhythm Festival Song List — Dondoko Songbook">
+  <meta property="og:description" content="Unofficial list of every song in Taiko no Tatsujin: Rhythm Festival (太鼓の達人 ドンダフルフェスティバル) — base game, DLC and Taiko Music Pass — with search in English, Japanese or romaji, filters, difficulty levels and audio previews.">
+  <meta name="theme-color" content="#e8380d">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%23fff6e0' stroke='%232a1206' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='17' fill='%23f2452b' stroke='%232a1206' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="sky" aria-hidden="true"><div class="rays"></div></div>
+  <div class="curtain" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="brand">
+      <svg class="brand-drum" viewBox="0 0 120 120" aria-hidden="true">
+        <ellipse cx="60" cy="106" rx="44" ry="8" fill="rgba(42,18,6,.25)"/>
+        <rect x="14" y="22" width="92" height="78" rx="30" fill="#b5441c" stroke="#2a1206" stroke-width="6"/>
+        <rect x="14" y="40" width="92" height="42" fill="#d85a24" stroke="#2a1206" stroke-width="0"/>
+        <path d="M14 46h92M14 76h92" stroke="#2a1206" stroke-width="5"/>
+        <g fill="#ffd23f" stroke="#2a1206" stroke-width="2.5"><circle cx="26" cy="61" r="4.5"/><circle cx="43" cy="61" r="4.5"/><circle cx="60" cy="61" r="4.5"/><circle cx="77" cy="61" r="4.5"/><circle cx="94" cy="61" r="4.5"/></g>
+        <ellipse cx="60" cy="26" rx="46" ry="17" fill="#fff6e0" stroke="#2a1206" stroke-width="6"/>
+        <ellipse cx="60" cy="26" rx="27" ry="9" fill="#f2452b" stroke="#2a1206" stroke-width="4"/>
+      </svg>
+      <div class="brand-text">
+        <h1><span class="brand-jp">ドンドコ</span><span class="brand-en">SONGBOOK</span></h1>
+        <p class="brand-sub" data-i18n="tagline">Every song in Taiko no Tatsujin: Rhythm Festival</p>
+      </div>
+    </div>
+    <div class="settings" role="group" aria-label="Preferences">
+      <div class="seg" id="seg-titles" role="group" data-i18n-aria="titlesLabel" aria-label="Title language">
+        <button type="button" data-v="en" class="on">English</button><button type="button" data-v="jp">日本語</button>
+      </div>
+      <button type="button" class="pill-toggle on" id="tg-autoplay" aria-pressed="true"><span class="dot"></span><span data-i18n="autoplay">Play on select</span></button>
+      <button type="button" class="pill-toggle on" id="tg-sfx" aria-pressed="true"><span class="dot"></span><span data-i18n="sfx">Drum sounds</span></button>
+    </div>
+  </header>
+
+  <div class="lane" aria-hidden="true">
+    <div class="lane-target"></div>
+    <div class="lane-notes" id="lane-notes"></div>
+  </div>
+
+  <main class="layout">
+    <div class="topbar" id="topbar">
+      <div class="search-row">
+        <label class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="3"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>
+          <input id="q" type="search" autocomplete="off" spellcheck="false" data-i18n-ph="searchPh" placeholder="Search in English, Japanese or romaji…">
+        </label>
+        <button type="button" class="chunky ghost" id="btn-filters" aria-expanded="false" aria-controls="filters"><span data-i18n="filters">Filters</span><b id="filters-badge" hidden>0</b></button>
+      </div>
+      <div class="status-row">
+        <div class="count" aria-live="polite"><b id="count">0</b><span id="count-label">songs</span></div>
+        <button type="button" class="link-btn" id="btn-clear" hidden data-i18n="clear">Clear filters</button>
+        <label class="sort"><span data-i18n="sort">Sort</span>
+          <select id="sel-sort" class="select"></select>
+        </label>
+      </div>
+    </div>
+
+    <aside class="filters" id="filters" aria-label="Filters">
+      <div class="fgroup">
+        <span class="flabel" data-i18n="fGenre">Genre</span>
+        <div class="genres" id="genres" role="tablist" aria-label="Genre"></div>
+      </div>
+      <div class="fgroup">
+        <span class="flabel" data-i18n="fSource">Source</span>
+        <div class="chips" id="chips-src"></div>
+      </div>
+      <div class="fgroup">
+        <span class="flabel" data-i18n="fPlatform">Platform</span>
+        <div class="chips" id="chips-platform"></div>
+      </div>
+      <div class="fgroup">
+        <span class="flabel" data-i18n="fPack">DLC pack</span>
+        <select id="sel-pack" class="select" aria-label="DLC pack"></select>
+      </div>
+      <div class="fgroup">
+        <span class="flabel" data-i18n="fLevel">Oni level</span>
+        <div class="chips levels" id="chips-level"></div>
+      </div>
+      <div class="fgroup">
+        <span class="flabel" data-i18n="fMore">More</span>
+        <div class="chips" id="chips-extra"></div>
+      </div>
+    </aside>
+
+    <section class="browser" aria-label="Song list">
+      <ol class="list" id="list"></ol>
+      <div class="empty" id="empty" hidden>
+        <div class="empty-face" aria-hidden="true">？</div>
+        <p data-i18n="empty">No songs found. Try clearing the filters.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p data-i18n-html="footData"></p>
+    <p data-i18n-html="footLegal"></p>
+  </footer>
+
+  <audio id="audio" preload="none"></audio>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

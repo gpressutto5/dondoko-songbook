@@ -1,0 +1,6 @@
+scripts/.cache/
+data/*.tmp
+.DS_Store
+.venv/
+__pycache__/
+.claude/
